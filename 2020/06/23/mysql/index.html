@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Hello World, binbin">
+    <meta name="keywords" content="mysql, binbin">
     <meta name="description" content="仅供大家参考">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Hello World | binbin</title>
+    <title>mysql | binbin</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -308,12 +308,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hello World</h1>
+                    <h1 class="description center-align post-title">mysql</h1>
                 </div>
             </div>
         </div>
@@ -442,7 +442,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2020-06-22
+                    2020-06-23
                 </div>
                 
 
@@ -458,19 +458,14 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+                <h1 id="mysql-部分"><a href="#mysql-部分" class="headerlink" title="mysql 部分"></a>mysql 部分</h1><h3 id="一-mysql-group-by"><a href="#一-mysql-group-by" class="headerlink" title="一 mysql group by"></a>一 mysql group by</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">由于自己的本地网站环境使用了 mysql 8.0的版本，在测试一个 group by 的sql查询语句时出现了如下的错误，在百度了不少的解决方法后，终于解决了了，记录一下。</span><br><span class="line">Expression #2 of SELECT list is not in GROUP BY clause........ which is not functionally dependent on columns in GROUP BY clause;this is incompatible with sql_mode&#x3D;only_full_group_by</span><br><span class="line"></span><br><span class="line">1、原理层面</span><br><span class="line">这个错误一般发生在mysql 5.7以及 5.7以上的版本中，其原因是mysql的默认配置中,sql_mode&#x3D;&quot;ONLY_FULL_GROUP_BY&quot; 这个配置严格执行了 &#39;SQL92标准&#39;,所以很高网站维护人员在升级mysql版本时，都会修改 sql_mode 的配置，使其能兼容。</span><br><span class="line"></span><br><span class="line">2、sql层面</span><br><span class="line">从sql层面来说，输出的结果思做target list，就是 select 后面跟着的字段，还有一个地方是 group by column,就是 group 后面跟着的字段，由于开启了 ONLY_FULL_GROUP_BY 的设置，如果没有字段在 target list 以及 group by 字段中同时出现，那么 sql 就认为此条语句是不合法的，就会抛出错误。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">sql_mode查询命令</span><br><span class="line">select @@GLOBAL.sql_mode;</span><br><span class="line"></span><br><span class="line">解决方法</span><br><span class="line"></span><br><span class="line">1、命令解决</span><br><span class="line">执行命令：</span><br><span class="line">set @@GLOBAL.sql_mode&#x3D;STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION;</span><br><span class="line">复制</span><br><span class="line">注：此种方式的修改，在mysql 重启后就会失效。</span><br><span class="line">2、修改 my.ini 文件</span><br><span class="line">需修改mysql配置文件，通过手动添加sql_mode的方式强制指定不需要ONLY_FULL_GROUP_BY属性，</span><br><span class="line">在 [mysqld] 下面添加代码：</span><br><span class="line">sql_mode&#x3D;STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+
+
+
 
             </div>
             <hr/>
@@ -496,7 +491,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://yoursite.com/2020/06/22/hello-world/">http://yoursite.com/2020/06/22/hello-world/</a>
+                    <a href="http://yoursite.com/2020/06/23/mysql/">http://yoursite.com/2020/06/23/mysql/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -699,9 +694,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+                <i class="far fa-dot-circle"></i>&nbsp;Current
+            </div>
             <div class="card">
                 <a href="/2020/06/23/mysql/">
                     <div class="card-image">
@@ -719,9 +715,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-06-23
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-23
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -730,6 +726,7 @@
                         </span>
                     </div>
                 </div>
+
                 
             </div>
         </div>
@@ -737,7 +734,7 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                Current&nbsp;<i class="far fa-dot-circle"></i>
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
                 <a href="/2020/06/22/hello-world/">
@@ -767,7 +764,6 @@
                         </span>
                     </div>
                 </div>
-
                 
             </div>
         </div>
