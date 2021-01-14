@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="linux, 随便写点">
+    <meta name="keywords" content="linux, github">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -464,23 +464,12 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="1-CentOS-7-yum-命令不生效-是因为没有配置yum源"><a href="#1-CentOS-7-yum-命令不生效-是因为没有配置yum源" class="headerlink" title="1 CentOS 7 yum 命令不生效 是因为没有配置yum源"></a>1 CentOS 7 yum 命令不生效 是因为没有配置yum源</h2><hr>
-<pre><code>最快的办法 删除文件 重新下载
-rm -f  /etc/yum.repos.d/CentOS-Base.repo 
-wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo </code></pre><hr>
+                <h2 id="1-CentOS-7-yum-命令不生效-是因为没有配置yum源"><a href="#1-CentOS-7-yum-命令不生效-是因为没有配置yum源" class="headerlink" title="1 CentOS 7 yum 命令不生效 是因为没有配置yum源"></a>1 CentOS 7 yum 命令不生效 是因为没有配置yum源</h2><p>   最快的办法 删除文件 重新下载<br>   rm -f  /etc/yum.repos.d/CentOS-Base.repo<br>   wget -O /etc/yum.repos.d/CentOS-Base.repo <a href="http://mirrors.aliyun.com/repo/Centos-7.repo" target="_blank" rel="noopener">http://mirrors.aliyun.com/repo/Centos-7.repo</a> </p>
 <h2 id="2-安装mysql-CentOS-7-0"><a href="#2-安装mysql-CentOS-7-0" class="headerlink" title="2 安装mysql (CentOS 7.0)"></a>2 安装mysql (CentOS 7.0)</h2><hr>
-<pre><code>1 sudo yum -y install mysql-server
-2 sudo vim /etc/my.cnf  default-character-set=utf8  // 设置字符集
-3 设置mysql随系统启动 sudo chkconfig mysqld on  sudo chkconfig --list mysqld 
-4 启动mysql服务  sudo service mysqld start
-5 非密码登陆     mysql -u root     删除匿名用户 delete from mysql.user where user=&apos;&apos;;</code></pre><h2 id="3-mysql-3306-开发外网操作"><a href="#3-mysql-3306-开发外网操作" class="headerlink" title="3 mysql 3306 开发外网操作"></a>3 mysql 3306 开发外网操作</h2><hr>
-<pre><code>1 sudo vim /etc/sysconfig/iptables
-2 在最下面加上3306的东西
-3 重新启动防火墙 sudo service iptables restart
-4 给mysql添加用户 insert into mysql.user(Host, User, Password) values(&quot;localhost&quot;, &quot;mmall&quot;, password(&quot;mmall&quot;));
-5 grant all privileges on mmall.* to mmall@&apos;%&apos; identified by &apos;mmall&apos; with grant option; // 赋予权限
-6 set password for root@localhost=password(&apos;root&apos;);  root 设置密码权限
-7 select user,host,password from mysql.user 查询所有用户是否有密码</code></pre><hr>
+<p>   1 sudo yum -y install mysql-server<br>   2 sudo vim /etc/my.cnf  default-character-set=utf8  // 设置字符集<br>   3 设置mysql随系统启动 sudo chkconfig mysqld on  sudo chkconfig –list mysqld<br>   4 启动mysql服务  sudo service mysqld start<br>   5 非密码登陆     mysql -u root     删除匿名用户 delete from mysql.user where user=’’;</p>
+<h2 id="3-mysql-3306-开发外网操作"><a href="#3-mysql-3306-开发外网操作" class="headerlink" title="3 mysql 3306 开发外网操作"></a>3 mysql 3306 开发外网操作</h2><hr>
+<p>   1 sudo vim /etc/sysconfig/iptables<br>   2 在最下面加上3306的东西<br>   3 重新启动防火墙 sudo service iptables restart<br>   4 给mysql添加用户 insert into mysql.user(Host, User, Password) values(“localhost”, “mmall”, password(“mmall”));<br>   5 grant all privileges on mmall.* to mmall@’%’ identified by ‘mmall’ with grant option; // 赋予权限<br>   6 set password for root@localhost=password(‘root’);  root 设置密码权限<br>   7 select user,host,password from mysql.user 查询所有用户是否有密码</p>
+<hr>
 
                 
             </div>
@@ -750,16 +739,16 @@ wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+                本篇&nbsp;<i class="far fa-dot-circle"></i>
             </div>
             <div class="card">
-                <a href="/2020/06/30/mysql/">
+                <a href="/2020/06/30/linux/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="mysql 部分">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="linux">
                         
-                        <span class="card-title">mysql 部分</span>
+                        <span class="card-title">linux</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -780,6 +769,7 @@ wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-
                         </span>
                     </div>
                 </div>
+
                 
             </div>
         </div>

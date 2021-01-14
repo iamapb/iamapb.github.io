@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="微信小程序, 随便写点">
+    <meta name="keywords" content="mysql, github">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>微信小程序 | 随便写点</title>
+    <title>mysql | 随便写点</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">微信小程序</h1>
+                    <h1 class="description center-align post-title">mysql</h1>
                 </div>
             </div>
         </div>
@@ -436,6 +436,15 @@
                 </div>
                 <div class="col s5 right-align">
                     
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/mysql/" class="post-category">
+                                mysql
+                            </a>
+                        
+                    </div>
+                    
                 </div>
             </div>
 
@@ -443,7 +452,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-07-18
+                    2021-01-14
                 </div>
                 
 
@@ -464,74 +473,13 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="获取微信小程序二维码-基于业务场景较多-个数没有限制"><a href="#获取微信小程序二维码-基于业务场景较多-个数没有限制" class="headerlink" title="获取微信小程序二维码 基于业务场景较多 个数没有限制"></a>获取微信小程序二维码 基于业务场景较多 个数没有限制</h3><hr>
-<pre><code>// 引入的jar包
-
-import org.apache.http.HttpEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
-
-
-CloseableHttpClient httpClient = HttpClients.createDefault();
-     HttpGet httpGet = new HttpGet(&quot;https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&amp;appid=&quot; + 你的appId+ &quot;&amp;secret=&quot; + Constant.WX_APP_SECRET);
-     CloseableHttpResponse resp;
-     String accessToken = &quot;&quot;;
-     try {
-         resp = httpClient.execute(httpGet);
-         HttpEntity entity = resp.getEntity();
-         String result = EntityUtils.toString(entity, &quot;UTF-8&quot;);
-         HashMap hashMap = objectMapper.readValue(result, HashMap.class);
-         accessToken = (String) hashMap.get(&quot;access_token&quot;);
-     } catch (IOException e) {
-         e.printStackTrace();
-     }
-     CourseModel courseModel = this.getById(id);
-
-     String url = &quot;https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=&quot; + accessToken;
-     HttpPost httpPost = new HttpPost(url);
-
-     String path = 发布的小程序对应的路径 // 必须是正确的 
-     Map&lt;String, String&gt; map = new HashMap&lt;String, String&gt;();
-     map.put(&quot;scene&quot;, id.toString());
-     map.put(&quot;page&quot;, path);
-     log.info(&quot;map---data:{}&quot;, JSON.toJSONString(map));
-     String jsonEncode = Util.jsonEncode(map);
-     StringEntity stringEntity = null;
-     try {
-          stringEntity = new StringEntity(jsonEncode, Charset.forName(&quot;UTF-8&quot;));
-     } catch (Exception e) {
-         e.printStackTrace();
-     }
-     httpPost.setEntity(stringEntity);
-
-     // 必须加上这两句 不然会报  {&quot;errcode&quot;:41030,&quot;errmsg&quot;:&quot;invalid page hint: [eU6RsA00464521]&quot;}
-
-     httpPost.addHeader(&quot;Content-type&quot;, &quot;application/json; charset=utf-8&quot;);
-     httpPost.setHeader(&quot;Accept&quot;, &quot;application/json&quot;);
-     CloseableHttpResponse response1 = null;
-     try {
-         response1 = httpClient.execute(httpPost);
-     } catch (IOException e) {
-         e.printStackTrace();
-     }
-     InputStream content = null;
-     try {
-         content = response1.getEntity().getContent();
-     } catch (IOException e) {
-         e.printStackTrace();
-     }
-       response.addHeader(&quot;Content-Type&quot;, &quot;image/jpeg&quot;);
-     try {
-         IOUtils.copy(content, response.getOutputStream());
-     } catch (IOException e) {
-         e.printStackTrace();
-}</code></pre><hr>
-
+                <h2 id="mysql-group-by-使用错误"><a href="#mysql-group-by-使用错误" class="headerlink" title="mysql group by 使用错误"></a>mysql group by 使用错误</h2><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>由于自己的本地网站环境使用了 mysql 8.0的版本，在测试一个 group by 的sql查询语句时出现了如下的错误，<br>在百度了不少的解决方法后，终于解决了了，记录一下</p>
+<h3 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h3><p>Expression #2 of SELECT list is not in GROUP BY clause……..<br>which is not functionally dependent on columns in GROUP BY clause;<br>this is incompatible with sql_mode=only_full_group_by</p>
+<h3 id="原理层面"><a href="#原理层面" class="headerlink" title="原理层面"></a>原理层面</h3><p>这个错误一般发生在mysql 5.7以及 5.7以上的版本中，其原因是mysql的默认配置中,<br>sql_mode=”ONLY_FULL_GROUP_BY”<br>这个配置严格执行了 ‘SQL92标准’,所以很高网站维护人员在升级mysql版本时，都会修改 sql_mode 的配置，使其能兼容。</p>
+<h3 id="sql层面"><a href="#sql层面" class="headerlink" title="sql层面"></a>sql层面</h3><p>从sql层面来说，输出的结果思做target list，就是 select 后面跟着的字段，还有一个地方是 group by column,<br>就是 group 后面跟着的字段，由于开启了 ONLY_FULL_GROUP_BY 的设置，如果没有字段在 target list<br>以及 group by 字段中同时出现，<br>那么 sql 就认为此条语句是不合法的，就会抛出错误。</p>
+<p>sql_mode查询命令<br>select @@GLOBAL.sql_mode;</p>
+<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>1、命令解决<br>执行命令：<br>set @@GLOBAL.sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,<br>ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION;<br>复制<br>注：此种方式的修改，在mysql 重启后就会失效。<br>2、修改 my.ini 文件<br>需修改mysql配置文件，通过手动添加sql_mode的方式强制指定不需要ONLY_FULL_GROUP_BY属性，<br>在 [mysqld] 下面添加代码：<br>sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,<br>ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION</p>
+<h2 id="docker-一健部署mysql"><a href="#docker-一健部署mysql" class="headerlink" title="docker 一健部署mysql"></a>docker 一健部署mysql</h2>
                 
             </div>
             <hr/>
@@ -557,7 +505,7 @@ CloseableHttpClient httpClient = HttpClients.createDefault();
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://iamapb.github.io/2020/07/18/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">http://iamapb.github.io/2020/07/18/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/</a>
+                    <a href="http://iamapb.github.io/2021/01/14/mysql/">http://iamapb.github.io/2021/01/14/mysql/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -766,13 +714,13 @@ CloseableHttpClient httpClient = HttpClients.createDefault();
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/07/19/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                <a href="/2021/01/14/sql/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="数据库">
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="sql">
                         
-                        <span class="card-title">数据库</span>
+                        <span class="card-title">sql</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -783,12 +731,16 @@ CloseableHttpClient httpClient = HttpClients.createDefault();
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-07-19
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-01-14
                         </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            binbin
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" class="post-category">
+                                    文件操作
+                                </a>
+                            
                             
                         </span>
                     </div>
@@ -803,13 +755,13 @@ CloseableHttpClient httpClient = HttpClients.createDefault();
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/07/09/%E4%B8%8A%E4%BC%A0/">
+                <a href="/2021/01/14/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="上传">
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="微信小程序">
                         
-                        <span class="card-title">上传</span>
+                        <span class="card-title">微信小程序</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -820,7 +772,7 @@ CloseableHttpClient httpClient = HttpClients.createDefault();
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-09
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-01-14
                             </span>
                         <span class="publish-author">
                             
